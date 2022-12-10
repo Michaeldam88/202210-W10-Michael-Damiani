@@ -2,6 +2,8 @@
 
 # Challege Week 10
 
+Netlify: thepointinggentelmen.netlify.app
+
 Crea una aplicación React a partir de esta maqueta. Identifica qué datos del HTML actual son dinámicos y prográmalos para que se alimenten a partir del array proporcionado.
 
 Utiliza los siguientes componentes: App, Info, Button, Gentleman
