@@ -1,4 +1,4 @@
-export type GentelmanType = {
+export type GentlemanType = {
     id: number;
     name: string;
     status: string;

@@ -1,9 +1,9 @@
-import { Gentelman } from '../gentleman/gentelman';
+import { Gentleman } from '../gentleman/gentleman';
 import { Header } from '../header/header';
 import { Info } from '../info/info';
 
 function App() {
-    const gentelmen = [
+    const gentlemen = [
         {
             id: 1,
             name: 'Bertin Osborne',
@@ -39,11 +39,16 @@ function App() {
         <div className="container">
             <Header></Header>
             <Info></Info>
-            <ul className="gentelmen">
-                {gentelmen.forEach((el) => (
-                    <Gentelman></Gentelman>
-                ))}
-            </ul>
+            <main className='main'>
+                <ul className="gentlemen">
+                    {gentlemen.map((gentlemanInfo) => (
+                        <Gentleman
+                            key={gentlemanInfo.name}
+                            gentlemanInfo={gentlemanInfo}
+                        ></Gentleman>
+                    ))}
+                </ul>
+            </main>
         </div>
     );
 }
