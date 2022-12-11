@@ -1,8 +1,11 @@
 import { GentlemanType } from '../../types/gentlemanType';
+import { ButtonDelete } from '../buttons/buttonDelete';
+import { ButtonSelect } from '../buttons/buttonSelect';
 
 export function Gentleman({ gentlemanInfo }: { gentlemanInfo: GentlemanType }) {
+        
     return (
-        <li className="gentleman">
+        <li className="gentleman" id={gentlemanInfo.name}>
             <div className="gentleman__avatar-container">
                 <img
                     className="gentleman__avatar"
@@ -32,8 +35,8 @@ export function Gentleman({ gentlemanInfo }: { gentlemanInfo: GentlemanType }) {
                     </li>
                 </ul>
             </div>
-            <i className="icon gentleman__icon fas fa-check"></i>
-            <i className="icon gentleman__icon gentleman__icon--delete fas fa-times"></i>
+            <ButtonSelect gentlemanName={gentlemanInfo.name}></ButtonSelect>
+            <ButtonDelete></ButtonDelete>
         </li>
     );
 }
