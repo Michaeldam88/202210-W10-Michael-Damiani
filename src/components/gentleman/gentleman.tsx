@@ -3,7 +3,13 @@ import { GentlemanType } from '../../types/gentlemanType';
 import { ButtonDelete } from '../buttons/buttonDelete';
 import { ButtonSelect } from '../buttons/buttonSelect';
 
-export function Gentleman({ gentlemanInfo }: { gentlemanInfo: GentlemanType }) {
+export function Gentleman({
+    gentlemanInfo,
+    deleteGentleman,
+}: {
+    gentlemanInfo: GentlemanType;
+    deleteGentleman: (id: string) => void;
+}) {
     const [selected, setSelected] = useState(gentlemanInfo.selected);
 
     const selectGentleman = () => {
@@ -49,7 +55,7 @@ export function Gentleman({ gentlemanInfo }: { gentlemanInfo: GentlemanType }) {
                 isSelected={gentlemanInfo.selected}
                 markSelected={selectGentleman}
             ></ButtonSelect>
-            <ButtonDelete></ButtonDelete>
+            <ButtonDelete removeElement={deleteGentleman}></ButtonDelete>
         </li>
     );
 }

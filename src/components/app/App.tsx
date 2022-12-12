@@ -39,8 +39,8 @@ function App() {
 
     const [elements, setElement] = useState(gentlemen);
 
-    const removeElement = (id: number) => {
-        const newElements = elements.filter((el) => el.id !== id);
+    const removeElement = (id: string) => {
+        const newElements = elements.filter((el) => 'id_' + el.id !== id);
         setElement(newElements);
     };
 
@@ -52,8 +52,9 @@ function App() {
                 <ul className="gentlemen">
                     {elements.map((gentlemanInfo) => (
                         <Gentleman
-                            key={gentlemanInfo.name}
+                            key={gentlemanInfo.id}
                             gentlemanInfo={gentlemanInfo}
+                            deleteGentleman={removeElement}
                         ></Gentleman>
                     ))}
                 </ul>
