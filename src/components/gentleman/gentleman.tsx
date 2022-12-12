@@ -1,13 +1,24 @@
+import { useState } from 'react';
 import { GentlemanType } from '../../types/gentlemanType';
 import { ButtonDelete } from '../buttons/buttonDelete';
 import { ButtonSelect } from '../buttons/buttonSelect';
 
 export function Gentleman({ gentlemanInfo }: { gentlemanInfo: GentlemanType }) {
+    const [selected, setSelected] = useState(gentlemanInfo.selected);
+
+    const selectGentleman = () => {
+        setSelected((selected) => {
+            return (selected = true);
+        });
+    };
+
     return (
-        <li className="gentleman" id={gentlemanInfo.name}>
+        <li className="gentleman" id={`id_${gentlemanInfo.id}`}>
             <div className="gentleman__avatar-container">
                 <img
-                    className="gentleman__avatar"
+                    className={`${
+                        selected ? 'avatar--selected' : ''
+                    } gentleman__avatar`}
                     src={`assets/${gentlemanInfo.picture}`}
                     alt="The Fary pointing at you"
                 />
@@ -34,7 +45,10 @@ export function Gentleman({ gentlemanInfo }: { gentlemanInfo: GentlemanType }) {
                     </li>
                 </ul>
             </div>
-            <ButtonSelect></ButtonSelect>
+            <ButtonSelect
+                isSelected={gentlemanInfo.selected}
+                markSelected={selectGentleman}
+            ></ButtonSelect>
             <ButtonDelete></ButtonDelete>
         </li>
     );

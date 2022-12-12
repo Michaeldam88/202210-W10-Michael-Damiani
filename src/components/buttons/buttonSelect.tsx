@@ -1,15 +1,26 @@
-import { LegacyRef, useRef } from 'react';
+import { useState } from 'react';
 
-export function ButtonSelect() {
-    const ref = useRef<HTMLElement>(null);
+export function ButtonSelect({
+    isSelected,
+    markSelected,
+}: {
+    isSelected: boolean;
+    markSelected: () => void;
+}) {
+    const [selected, setSelected] = useState(isSelected);
+
     const selectGentleman = () => {
-        if(ref && ref.current)ref.current.style.display = 'flex';
+        markSelected();
+        setSelected((selected) => {
+            return (selected = true);
+        });
     };
 
     return (
         <i
-            ref={ref}
-            className="icon gentleman__icon fas fa-check"
+            className={`${
+                selected ? 'icon--selected' : ''
+            } icon gentleman__icon fas fa-check`}
             onClick={selectGentleman}
         ></i>
     );

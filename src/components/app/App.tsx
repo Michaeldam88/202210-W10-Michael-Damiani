@@ -13,7 +13,7 @@ function App() {
             twitter: '@osbourne',
             picture: 'bertin.jpg',
             alternativeText: 'Osbourne pointing at you',
-            selected: true,
+            selected: false,
         },
         {
             name: 'The Farytale',
