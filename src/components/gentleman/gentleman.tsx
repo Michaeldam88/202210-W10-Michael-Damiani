@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { gentlemen } from '../../models/gentleman';
 import { GentlemanType } from '../../types/gentlemanType';
 import { ButtonDelete } from '../buttons/buttonDelete';
 import { ButtonSelect } from '../buttons/buttonSelect';
@@ -16,6 +17,12 @@ export function Gentleman({
 
     const selectGentleman = () => {
         if (selected) return;
+        gentlemen.forEach((element) => {
+            if (element.id === gentlemanInfo.id) {
+                element.selected = true;
+            }
+        });
+
         getTotalSelected();
         setSelected((selected) => {
             return (selected = true);

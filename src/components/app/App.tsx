@@ -1,45 +1,18 @@
 import { useState } from 'react';
+import { gentlemen } from '../../models/gentleman';
 import { Gentleman } from '../gentleman/gentleman';
 import { Header } from '../header/header';
 import { Info } from '../info/info';
 
 function App() {
-    const gentlemen = [
-        {
-            id: 1,
-            name: 'Bertin Osborne',
-            status: 'Alive',
-            profession: 'Youtuber',
-            twitter: '@osbourne',
-            picture: 'bertin.jpg',
-            alternativeText: 'Osbourne pointing at you',
-            selected: false,
-        },
-        {
-            name: 'The Farytale',
-            status: 'RIP',
-            profession: 'Influencer',
-            twitter: 'pending',
-            picture: 'fary.jpg',
-            alternativeText: 'The Fary pointing at you',
-            id: 2,
-            selected: false,
-        },
-        {
-            id: 3,
-            name: 'Julius Churchs',
-            status: 'Alive',
-            profession: 'Java developer',
-            twitter: '@julius_churchs',
-            picture: 'julio.jpg',
-            alternativeText: 'Churchs pointing at you',
-            selected: true,
-        },
-    ];
-
     const [elements, setElement] = useState(gentlemen);
 
     const removeElement = (id: string) => {
+        const eliminatedElement = elements.filter((el) => 'id_' + el.id === id);
+        if (eliminatedElement[0].selected) {
+            removePointingGent();
+        }
+
         const newElements = elements.filter((el) => 'id_' + el.id !== id);
         setElement(newElements);
     };
@@ -55,6 +28,10 @@ function App() {
 
     const addPointingGent = () => {
         setTotalSelected(totalSelected + 1);
+    };
+
+    const removePointingGent = () => {
+        setTotalSelected(totalSelected - 1);
     };
 
     return (
