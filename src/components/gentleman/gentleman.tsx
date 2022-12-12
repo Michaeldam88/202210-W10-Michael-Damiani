@@ -3,7 +3,6 @@ import { ButtonDelete } from '../buttons/buttonDelete';
 import { ButtonSelect } from '../buttons/buttonSelect';
 
 export function Gentleman({ gentlemanInfo }: { gentlemanInfo: GentlemanType }) {
-        
     return (
         <li className="gentleman" id={gentlemanInfo.name}>
             <div className="gentleman__avatar-container">
@@ -35,7 +34,7 @@ export function Gentleman({ gentlemanInfo }: { gentlemanInfo: GentlemanType }) {
                     </li>
                 </ul>
             </div>
-            <ButtonSelect gentlemanName={gentlemanInfo.name}></ButtonSelect>
+            <ButtonSelect></ButtonSelect>
             <ButtonDelete></ButtonDelete>
         </li>
     );

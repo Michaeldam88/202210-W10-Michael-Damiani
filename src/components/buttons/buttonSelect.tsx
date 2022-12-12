@@ -1,14 +1,15 @@
-export function ButtonSelect({ gentlemanName }: { gentlemanName: string }) {
+import { LegacyRef, useRef } from 'react';
+
+export function ButtonSelect() {
+    const ref = useRef<HTMLElement>(null);
     const selectGentleman = () => {
-        const button = document.querySelector(
-            `#${gentlemanName} .icon--select`
-        );
-        console.log(gentlemanName);
-        button?.classList.add('.flex');
+        if(ref && ref.current)ref.current.style.display = 'flex';
     };
+
     return (
         <i
-            className="icon icon--select gentleman__icon fas fa-check"
+            ref={ref}
+            className="icon gentleman__icon fas fa-check"
             onClick={selectGentleman}
         ></i>
     );

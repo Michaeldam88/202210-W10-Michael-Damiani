@@ -132,9 +132,5 @@ h2 {
 }
 .gentleman.selected .gentleman__avatar,
 .gentleman:hover .gentleman__avatar {
-    transform: scaleX(-100%);    
-}
-
-.flex{
-    display: flex;
+    transform: scaleX(-100%);
 }

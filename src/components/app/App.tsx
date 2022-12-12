@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Gentleman } from '../gentleman/gentleman';
 import { Header } from '../header/header';
 import { Info } from '../info/info';
@@ -35,13 +36,21 @@ function App() {
             selected: true,
         },
     ];
+
+    const [elements, setElement] = useState(gentlemen);
+
+    const removeElement = (id: number) => {
+        const newElements = elements.filter((el) => el.id !== id);
+        setElement(newElements);
+    };
+
     return (
         <div className="container">
             <Header></Header>
             <Info></Info>
-            <main className='main'>
+            <main className="main">
                 <ul className="gentlemen">
-                    {gentlemen.map((gentlemanInfo) => (
+                    {elements.map((gentlemanInfo) => (
                         <Gentleman
                             key={gentlemanInfo.name}
                             gentlemanInfo={gentlemanInfo}
