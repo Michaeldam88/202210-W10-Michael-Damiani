@@ -43,11 +43,24 @@ function App() {
         const newElements = elements.filter((el) => 'id_' + el.id !== id);
         setElement(newElements);
     };
+    let startingPoint = 0;
+
+    gentlemen.forEach((ele) => {
+        if (ele.selected) {
+            startingPoint++;
+        }
+    });
+
+    const [totalSelected, setTotalSelected] = useState(startingPoint);
+
+    const addPointingGent = () => {
+        setTotalSelected(totalSelected + 1);
+    };
 
     return (
         <div className="container">
             <Header></Header>
-            <Info></Info>
+            <Info totalSelected={totalSelected}></Info>
             <main className="main">
                 <ul className="gentlemen">
                     {elements.map((gentlemanInfo) => (
@@ -55,6 +68,7 @@ function App() {
                             key={gentlemanInfo.id}
                             gentlemanInfo={gentlemanInfo}
                             deleteGentleman={removeElement}
+                            getTotalSelected={addPointingGent}
                         ></Gentleman>
                     ))}
                 </ul>

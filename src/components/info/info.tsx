@@ -1,9 +1,9 @@
 import { ButtonSelectAll } from "../buttons/buttonSelectAll";
 
-export function Info() {
+export function Info({ totalSelected }: { totalSelected :number}) {
     return (
         <section className="controls">
-            <p className="info">0 gentlemen pointing at you</p>
+            <p className="info">{totalSelected} gentlemen pointing at you</p>
             <ButtonSelectAll></ButtonSelectAll>
         </section>
     );

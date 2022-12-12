@@ -6,13 +6,17 @@ import { ButtonSelect } from '../buttons/buttonSelect';
 export function Gentleman({
     gentlemanInfo,
     deleteGentleman,
+    getTotalSelected,
 }: {
     gentlemanInfo: GentlemanType;
     deleteGentleman: (id: string) => void;
+    getTotalSelected: () => void;
 }) {
     const [selected, setSelected] = useState(gentlemanInfo.selected);
 
     const selectGentleman = () => {
+        if (selected) return;
+        getTotalSelected();
         setSelected((selected) => {
             return (selected = true);
         });
