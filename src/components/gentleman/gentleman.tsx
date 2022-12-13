@@ -7,12 +7,13 @@ import { ButtonSelect } from '../buttons/buttonSelect';
 export function Gentleman({
     gentlemanInfo,
     deleteGentleman,
-    getTotalSelected,
+    manageNumOFSelected,
 }: {
     gentlemanInfo: GentlemanType;
     deleteGentleman: (id: string) => void;
-    getTotalSelected: () => void;
+    manageNumOFSelected: () => void;
 }) {
+    
     const [selected, setSelected] = useState(gentlemanInfo.selected);
 
     const selectGentleman = () => {
@@ -23,7 +24,7 @@ export function Gentleman({
             }
         });
 
-        getTotalSelected();
+        manageNumOFSelected();
         setSelected((selected) => {
             return (selected = true);
         });

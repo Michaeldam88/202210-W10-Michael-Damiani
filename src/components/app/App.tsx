@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { gentlemen } from '../../models/gentleman';
 import { Gentleman } from '../gentleman/gentleman';
 import { Header } from '../header/header';
@@ -8,47 +8,46 @@ function App() {
     const [elements, setElement] = useState(gentlemen);
 
     const removeElement = (id: string) => {
-        const eliminatedElement = elements.filter((el) => 'id_' + el.id === id);
-        if (eliminatedElement[0].selected) {
-            removePointingGent();
-        }
-
         const newElements = elements.filter((el) => 'id_' + el.id !== id);
         setElement(newElements);
     };
-    let startingPoint = 0;
-
-    gentlemen.forEach((ele) => {
-        if (ele.selected) {
-            startingPoint++;
-        }
-    });
-
-    const [totalSelected, setTotalSelected] = useState(startingPoint);
-
-    const addPointingGent = () => {
-        setTotalSelected(totalSelected + 1);
+    const selectAll = () => {
+        const allSelected = elements.map((ele) => {
+            return { ...ele, selected: true };
+        });
+        setElement(allSelected);
     };
 
-    const removePointingGent = () => {
-        setTotalSelected(totalSelected - 1);
+    const [totalSelected, setTotalSelected] = useState(0);
+    const manageNumOFSelected = () => {
+        let total = 0;
+        elements.forEach((ele) => {
+            if (ele.selected) {
+                total++;
+            }
+        });
+        setTotalSelected(total);
     };
+
+    const loadGentleman = () => {
+        return elements.map((gentlemanInfo) => (
+            <Gentleman
+                key={gentlemanInfo.id}
+                gentlemanInfo={gentlemanInfo}
+                deleteGentleman={removeElement}
+                manageNumOFSelected={manageNumOFSelected}
+            ></Gentleman>
+        ));
+    };
+    
+    useEffect(manageNumOFSelected, [elements]);
 
     return (
         <div className="container">
             <Header></Header>
-            <Info totalSelected={totalSelected}></Info>
+            <Info totalSelected={totalSelected} selectAll={selectAll}></Info>
             <main className="main">
-                <ul className="gentlemen">
-                    {elements.map((gentlemanInfo) => (
-                        <Gentleman
-                            key={gentlemanInfo.id}
-                            gentlemanInfo={gentlemanInfo}
-                            deleteGentleman={removeElement}
-                            getTotalSelected={addPointingGent}
-                        ></Gentleman>
-                    ))}
-                </ul>
+                <ul className="gentlemen">{loadGentleman()}</ul>
             </main>
         </div>
     );

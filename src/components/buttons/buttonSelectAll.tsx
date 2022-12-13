@@ -1,9 +1,7 @@
-export function ButtonSelectAll() {
-    const selectAll = () => {
-        console.log('deleted');
-    };
+export function ButtonSelectAll({ selectAllGent }: { selectAllGent: () => void }) {
+    
     return (
-        <button className="button button--select" onClick={selectAll}>
+        <button className="button button--select" onClick={selectAllGent}>
             Select all
         </button>
     );
