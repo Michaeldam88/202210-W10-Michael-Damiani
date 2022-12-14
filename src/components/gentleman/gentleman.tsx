@@ -21,14 +21,11 @@ export function Gentleman({
                 element.selected = true;
             }
         });
-
-        setElement(true);
         manageNumOFSelected();
     };
 
     const changeClassName = () => {
         if (gentlemanInfo.selected) {
-            console.log('change');
             setElement(true);
         }
     };
@@ -69,7 +66,7 @@ export function Gentleman({
                 </ul>
             </div>
             <ButtonSelect
-                isSelected={gentlemanInfo.selected}
+                isSelected={isSelected}
                 markSelected={selectGentleman}
             ></ButtonSelect>
             <ButtonDelete removeElement={deleteGentleman}></ButtonDelete>

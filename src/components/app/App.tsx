@@ -39,7 +39,7 @@ function App() {
             ></Gentleman>
         ));
     };
-    
+
     useEffect(manageNumOFSelected, [elements]);
 
     return (
