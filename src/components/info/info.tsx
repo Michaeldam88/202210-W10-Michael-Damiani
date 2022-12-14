@@ -1,8 +1,10 @@
-export function Info() {
+import { ButtonSelectAll } from '../buttons/buttonSelectAll';
+
+export function Info({ totalSelected, selectAll }: { totalSelected: number, selectAll: () => void }) {
     return (
         <section className="controls">
-            <p className="info">0 gentlemen pointing at you</p>
-            <button className="button button--select">Select all</button>
+            <p className="info">{totalSelected} gentlemen pointing at you</p>
+            <ButtonSelectAll selectAllGent={selectAll}></ButtonSelectAll>
         </section>
     );
 }

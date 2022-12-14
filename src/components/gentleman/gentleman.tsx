@@ -1,11 +1,44 @@
+import { useEffect, useState } from 'react';
+import { gentlemen } from '../../models/gentleman';
 import { GentlemanType } from '../../types/gentlemanType';
+import { ButtonDelete } from '../buttons/buttonDelete';
+import { ButtonSelect } from '../buttons/buttonSelect';
 
-export function Gentleman({ gentlemanInfo }: { gentlemanInfo: GentlemanType }) {
+export function Gentleman({
+    gentlemanInfo,
+    deleteGentleman,
+    manageNumOFSelected,
+}: {
+    gentlemanInfo: GentlemanType;
+    deleteGentleman: (id: string) => void;
+    manageNumOFSelected: () => void;
+}) {
+    const [isSelected, setElement] = useState(gentlemanInfo.selected);
+    const selectGentleman = () => {
+        if (isSelected) return;
+        gentlemen.forEach((element) => {
+            if (element.id === gentlemanInfo.id) {
+                element.selected = true;
+            }
+        });
+        manageNumOFSelected();
+    };
+
+    const changeClassName = () => {
+        if (gentlemanInfo.selected) {
+            setElement(true);
+        }
+    };
+
+    useEffect(changeClassName, [gentlemanInfo.selected]);
+
     return (
-        <li className="gentleman">
+        <li className="gentleman" id={`id_${gentlemanInfo.id}`}>
             <div className="gentleman__avatar-container">
                 <img
-                    className="gentleman__avatar"
+                    className={`${
+                        isSelected ? 'avatar--selected' : ''
+                    } gentleman__avatar`}
                     src={`assets/${gentlemanInfo.picture}`}
                     alt="The Fary pointing at you"
                 />
@@ -32,8 +65,11 @@ export function Gentleman({ gentlemanInfo }: { gentlemanInfo: GentlemanType }) {
                     </li>
                 </ul>
             </div>
-            <i className="icon gentleman__icon fas fa-check"></i>
-            <i className="icon gentleman__icon gentleman__icon--delete fas fa-times"></i>
+            <ButtonSelect
+                isSelected={isSelected}
+                markSelected={selectGentleman}
+            ></ButtonSelect>
+            <ButtonDelete removeElement={deleteGentleman}></ButtonDelete>
         </li>
     );
 }
