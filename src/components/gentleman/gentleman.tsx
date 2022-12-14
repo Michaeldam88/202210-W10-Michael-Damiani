@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { gentlemen } from '../../models/gentleman';
 import { GentlemanType } from '../../types/gentlemanType';
 import { ButtonDelete } from '../buttons/buttonDelete';
@@ -13,29 +13,34 @@ export function Gentleman({
     deleteGentleman: (id: string) => void;
     manageNumOFSelected: () => void;
 }) {
-    
-    const [selected, setSelected] = useState(gentlemanInfo.selected);
-
+    const [isSelected, setElement] = useState(gentlemanInfo.selected);
     const selectGentleman = () => {
-        if (selected) return;
+        if (isSelected) return;
         gentlemen.forEach((element) => {
             if (element.id === gentlemanInfo.id) {
                 element.selected = true;
             }
         });
 
+        setElement(true);
         manageNumOFSelected();
-        setSelected((selected) => {
-            return (selected = true);
-        });
     };
+
+    const changeClassName = () => {
+        if (gentlemanInfo.selected) {
+            console.log('change');
+            setElement(true);
+        }
+    };
+
+    useEffect(changeClassName, [gentlemanInfo.selected]);
 
     return (
         <li className="gentleman" id={`id_${gentlemanInfo.id}`}>
             <div className="gentleman__avatar-container">
                 <img
                     className={`${
-                        selected ? 'avatar--selected' : ''
+                        isSelected ? 'avatar--selected' : ''
                     } gentleman__avatar`}
                     src={`assets/${gentlemanInfo.picture}`}
                     alt="The Fary pointing at you"
